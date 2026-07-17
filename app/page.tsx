@@ -51,13 +51,13 @@ const openSearchModal = () => {
 
   //時間ごとの天気予想のモックデータ(hourlyWeahterData)
   const hourlyWeatherData: HourlyWeatherType[]  = [
-    {time: "Now", icon: <Sun size={35} />, temp: 27},
-    {time: "12:00", icon: <Sun size={30} />, temp: 27},  
-    {time: "15:00", icon: <Sun size={30} />, temp: 28},  
-    {time: "18:00", icon: <Sun size={30} />, temp: 26},  
-    {time: "21:00", icon: <Sun size={30} />, temp: 22},  
-    {time: "0:00", icon: <Sun size={30} />, temp: 19},  
-    {time: "3:00", icon: <Sun size={30} />, temp: 17},  
+    {time: "Now", icon: <Sun size={30} />, temp: "27°"},
+    {time: "12:00", icon: <Sun size={30} />, temp: "27°"},  
+    {time: "15:00", icon: <Sun size={30} />, temp: "28°"},  
+    {time: "18:00", icon: <Sun size={30} />, temp: "26°"},  
+    {time: "21:00", icon: <Sun size={30} />, temp: "22°"},  
+    {time: "0:00", icon: <Sun size={30} />, temp: "19°"},  
+    {time: "3:00", icon: <Sun size={30} />, temp: "17°"},  
   ]
 
   //１週間の天気予想のモックデータ
@@ -72,7 +72,7 @@ const openSearchModal = () => {
   ];
 
   //今日の天気データ(WeatherDataの＊番目の要素)を取得する
-  const todayWeather = dailyWeatherData[2];
+  const todayWeather = dailyWeatherData[0];
   //今日の天気の種類に応じて背景クラスを決定する
   const bgClass = getBgClass(todayWeather.type);
 

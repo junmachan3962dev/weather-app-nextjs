@@ -14,6 +14,11 @@ type hourlyWeatherCardProps = {
 };
 
 export function HourlyWeatherCard({weather}: hourlyWeatherCardProps) {
+  //初回の現在時刻の天気用
+  const first = weather[0];
+  //2件目以降の天気用
+  const rest = weather.slice(1);
+  
   return (
     //ガラスモーフィズム適用
     <Card className="backdrop-blur-md bg-white/20 border border-white/30 shadow-lg p-4">
@@ -29,8 +34,14 @@ export function HourlyWeatherCard({weather}: hourlyWeatherCardProps) {
             {/* 横スクロール対応リスト：スクロールバー非表示 */}
             <ul className="flex overflow-x-auto pl-2 snap-proximity scroll-smooth  scrollbar-none">
                 {/* 現在の時刻のアイテム：強調のための追加のグラスモーフィズム */}
-                {weather.map((item, index) => (
-                <li key={item.time} className="hourly-item backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg">
+                  <li key={first.time} className="hourly-item font-extrabold backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg">
+                    <p>{first.time}</p>
+                    {first.icon}
+                    <p>{first.temp}</p>
+                  </li>
+
+                {rest.map((item) => (
+                <li key={item.time} className="hourly-item">
                     <p>{item.time}</p>
                     {item.icon}
                     <p>{item.temp}</p>
