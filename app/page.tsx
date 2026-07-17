@@ -1,18 +1,21 @@
 'use client';
+//ReactのuseState フックを読み込む（コンポーネント内で状態を管理する）
+import {useState} from "react";
+
+//lucide-reactから天気アイコンをインポート
+import {Sun, Cloud, CloudRain} from "lucide-react";
+
 //各コンポーネントをインポートする
 import { CurrentWeatherCard } from "@/components/weather/current-weather-card";
 import { DailyWeatherCard } from "@/components/weather/daily-weather-card";
 import { HourlyWeatherCard } from "@/components/weather/hourly-weather-card";
-//lucide-reactから天気アイコンをインポート
-import {Sun, Cloud, CloudRain} from "lucide-react";
+
 //現在の天気予想の型定義をインポート
 import {CurrentWeatherType} from "@/types/current-weather";
 //週間天気用の型定義をインポート
 import { WeatherType, WeatherItem } from "@/types/daily-weather";
 //時間ごとの天気用の型定義をインポート
 import {HourlyWeatherType} from "@/types/hourly-wether";
-//
-import {useState} from "react";
 
 
 //天気の種類に応じて、背景のグラデーションクラスを切り替える関数
@@ -47,8 +50,16 @@ const openSearchModal = () => {
   };
 
   //時間ごとの天気予想のモックデータ(hourlyWeahterData)
-  
-  
+  const hourlyWeatherData: HourlyWeatherType[]  = [
+    {time: "Now", icon: <Sun size={35} />, temp: 27},
+    {time: "12:00", icon: <Sun size={30} />, temp: 27},  
+    {time: "15:00", icon: <Sun size={30} />, temp: 28},  
+    {time: "18:00", icon: <Sun size={30} />, temp: 26},  
+    {time: "21:00", icon: <Sun size={30} />, temp: 22},  
+    {time: "0:00", icon: <Sun size={30} />, temp: 19},  
+    {time: "3:00", icon: <Sun size={30} />, temp: 17},  
+  ]
+
   //１週間の天気予想のモックデータ
   const dailyWeatherData: WeatherItem[] = [
     //iconは一時的に表示ように設定したので外部データを取得した時に消去すること
@@ -77,7 +88,7 @@ const openSearchModal = () => {
       </div>
 
       <div>
-        <HourlyWeatherCard />
+        <HourlyWeatherCard weather={hourlyWeatherData}/>
       </div>
 
       <div>
