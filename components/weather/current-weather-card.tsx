@@ -1,22 +1,20 @@
 'use client'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Sun } from "lucide-react";
+
 import {CurrentWeatherType} from "@/types/current-weather";
 
+import {ElementType} from "react";
+
+//現在の天気カードコンポーネントに渡されるpropsの定義
 interface CurrentWeatherCardProps {
-  weather: CurrentWeatherType;
-  openSearchModal: () => void;
+  weather: CurrentWeatherType;  //表示対象の天気データ
+  openSearchModal: () => void;  //検索モーダルを開くためのハンドラー
+  IconComponent: ElementType;   //天気アイコンのコンポーネント
+  iconClass: string;            //天気の種類に応じた色のクラス
 };
 
 
 export function CurrentWeatherCard(
-  {weather, openSearchModal}: CurrentWeatherCardProps) 
+  {weather, openSearchModal, IconComponent, iconClass}: CurrentWeatherCardProps) 
 {
   return (
     <main>
@@ -28,9 +26,11 @@ export function CurrentWeatherCard(
           <span className="text-xs">▼</span>
         </div>
       </div>
+
       {/* 現在の天気アイコン、気温、概要 */}
       <div className="flex flex-col items-center mt-2">
-        {weather.icon}
+        {/* IconComponentのデータを流し込む */}
+        <IconComponent className={iconClass} size={64} />
         <p className="mt-2 text-3xl font-extrabold"></p>
         <p className="font-semibold">{weather.weather}</p>
         {/* 最高気温と最低気温の表示 */}
