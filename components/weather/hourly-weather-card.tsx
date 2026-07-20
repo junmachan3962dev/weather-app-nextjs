@@ -6,14 +6,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { HourlyWeatherType } from "@/types/hourly-wether";
+
+import { WEATHER_ICONS } from "@/constants/weather";
+import {ElementType} from "react";
+
 //lucide-reactからアイコンをインポート
 import {Clock} from 'lucide-react'
 
 type hourlyWeatherCardProps = {
   weather: HourlyWeatherType[];
+  IconComponent: ElementType;
+  iconClass: string;
 };
 
-export function HourlyWeatherCard({weather}: hourlyWeatherCardProps) {
+export function HourlyWeatherCard({weather, IconComponent, iconClass}: hourlyWeatherCardProps) {
   //初回の現在時刻の天気用
   const first = weather[0];
   //2件目以降の天気用
@@ -36,17 +42,17 @@ export function HourlyWeatherCard({weather}: hourlyWeatherCardProps) {
                 {/* 現在の時刻のアイテム：強調のための追加のグラスモーフィズム */}
                   <li key={first.time} className="hourly-item font-extrabold backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg">
                     <p>{first.time}</p>
-                    {first.icon}
+                    <IconComponent className={iconClass} size={20} />
                     <p>{first.temp}</p>
                   </li>
 
                 {rest.map((item) => (
                 <li key={item.time} className="hourly-item">
                     <p>{item.time}</p>
-                    {item.icon}
+                    <IconComponent className={iconClass} size={20} />
                     <p>{item.temp}</p>
                 </li>
-            ))};
+            ))}
             </ul>
       </CardContent>
     </Card>

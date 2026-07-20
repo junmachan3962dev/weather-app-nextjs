@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarDays, Sun } from "lucide-react";
 import {WeatherItem} from "@/types/daily-weather";
 
+import { WEATHER_ICONS } from "@/constants/weather";
+
 //DailyWeatherCardコンポーネントが受け取るpropsの型
 //weatherには週間天気のWeatherItemの配列を渡す
 type DailyWeatherCardProps = {
