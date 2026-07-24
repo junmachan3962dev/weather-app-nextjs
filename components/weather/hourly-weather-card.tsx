@@ -42,14 +42,14 @@ export function HourlyWeatherCard({weather, IconComponent, iconClass}: hourlyWea
                 {/* 現在の時刻のアイテム：強調のための追加のグラスモーフィズム */}
                   <li key={first.time} className="hourly-item font-extrabold backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg">
                     <p>{first.time}</p>
-                    <IconComponent className={iconClass} size={20} />
+                    <span>{first.icon}</span>
                     <p>{first.temp}</p>
                   </li>
 
                 {rest.map((item) => (
                 <li key={item.time} className="hourly-item">
                     <p>{item.time}</p>
-                    <IconComponent className={iconClass} size={20} />
+                    <span>{item.icon}</span>
                     <p>{item.temp}</p>
                 </li>
             ))}

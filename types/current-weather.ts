@@ -9,5 +9,5 @@ export interface CurrentWeatherType {
     weather: string;       //天気の説明(sunny,cloudy など)
     high: number;          //今日の最高気温
     low: number;           //今日の最低気温
-    type: WeatherType;     //天気アイコンの種類はWeatherTypeを使い回す
+    icon: WeatherType;     //天気アイコンの種類はWeatherTypeを使い回す
 }

@@ -15,7 +15,7 @@ export const currentWeatherData: CurrentWeatherType = {
   weather: "sunny",           //天気の種類の表示用("sunny","rainy"など)
   high: 27,
   low: 15,
-  type: "sunny",              //天気アイコンの表示用
+  icon: "sunny",              //天気アイコンの表示用
 };
 
 //時間ごとの天気予想のモックデータ

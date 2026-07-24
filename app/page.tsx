@@ -75,18 +75,11 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const openSearchModal = () => setIsOpen(true);
 
-  // --- 表示用ロジック(dailyWeatherDataからデータ取得) ---
-
-  //dailyWeatherDataの ＊版目のデータを取得する（天気アイコンと背景切り替え関数共通）
+  //表示用ロジック（現在の天気・背景用） 
   const todayWeather = dailyWeatherData[0];         
   
-  //天気アイコン色変換用関数
   const iconClass = getIconClass(todayWeather.type);
-  
-  //現在の天気対応の背景切り替え関数
   const bgClass = getBgClass(todayWeather.type);
-
-  //天気の種類に応じたアイコンを表示するための関数
   const IconComponent = getIconComponent(todayWeather.type);
   
   
@@ -107,7 +100,6 @@ export default function Home() {
       <div>
         <HourlyWeatherCard 
           weather={hourlyWeatherData}
-          IconComponent={IconComponent}
         />
       </div>
 
