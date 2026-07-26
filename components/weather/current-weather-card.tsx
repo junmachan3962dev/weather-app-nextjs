@@ -41,10 +41,10 @@ export function CurrentWeatherCard({
         {/* 最高気温と最低気温の表示 */}
         <div className="flex justify-center mt-2 gap-2 font-semibold">
           <div>
-            <span>{weather.high}</span>
+            <span>{weather.high}°</span>
           </div>
           <div>
-            <span>{weather.low}</span>
+            <span>{weather.low}°</span>
           </div>
         </div>
       </div>

@@ -7,6 +7,6 @@ export interface WeatherItem {
     min: number;        //最低気温
     max: number;        //最高気温
     percentage: number; //気温プログレスバーの割合
-    icon: React.ReactNode; //天気アイコンを追加
+    icon: WeatherType; //天気アイコンを追加
 }
 

@@ -1,22 +1,23 @@
-//chadcn/uiから部品をインポート
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { HourlyWeatherType } from "@/types/hourly-wether";
-
-import { WEATHER_ICONS } from "@/constants/weather";
-import { ElementType } from "react";
-
-//lucide-reactからアイコンをインポート
 import { Clock } from "lucide-react";
+
+import { HourlyWeatherType } from "@/types/hourly-wether";
+import { getIconComponent, getIconClass } from "@/utils/weather-utils";
 
 type hourlyWeatherCardProps = {
   weather: HourlyWeatherType[];
 };
 
-export function HourlyWeatherCard({weather}: hourlyWeatherCardProps) {
+export function HourlyWeatherCard({ weather }: hourlyWeatherCardProps) {
   //初回の現在時刻の天気用
   const first = weather[0];
+  getIconClass;
   //2件目以降の天気用
   const rest = weather.slice(1);
+
+  //最初の1件（現在時刻の天気）だけデザインが異なるため個別に処理
+  const FirstIcon = getIconComponent(first.icon);
+  const firstIconClass = getIconClass(first.icon);
 
   return (
     //ガラスモーフィズム適用
@@ -38,17 +39,24 @@ export function HourlyWeatherCard({weather}: hourlyWeatherCardProps) {
             className="hourly-item font-extrabold backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg"
           >
             <p>{first.time}</p>
-            <span>{first.icon}</span>
+            <FirstIcon className={firstIconClass} size={25} />
             <p>{first.temp}</p>
           </li>
 
-          {rest.map((item) => (
-            <li key={item.time} className="hourly-item">
-              <p>{item.time}</p>
-              <span>{item.icon}</span>
-              <p>{item.temp}</p>
-            </li>
-          ))}
+          {/* 2件目以降は同じデザインで繰り返し表示 */}
+          {rest.map((item) => {
+            //天気タイプごとにアイコンと色を変換
+            const Icon = getIconComponent(item.icon);
+            const iconClass = getIconClass(item.icon);
+
+            return (
+              <li key={item.time} className="hourly-item">
+                <p>{item.time}</p>
+                <Icon className={iconClass} size={25} />
+                <p>{item.temp}</p>
+              </li>
+            );
+          })}
         </ul>
       </CardContent>
     </Card>

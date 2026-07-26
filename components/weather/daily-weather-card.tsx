@@ -11,6 +11,8 @@ type DailyWeatherCardProps = {
 };
 
 export function DailyWeatherCard({ weather }: DailyWeatherCardProps) {
+
+  
   return (
     //カード全体の見た目（背景投下や境界線）を設定
     <Card className="backdrop-blur-md bg-white/20 border border-white/30 shadow-lg p-4">
@@ -39,7 +41,7 @@ export function DailyWeatherCard({ weather }: DailyWeatherCardProps) {
               {/* 気温表示とプログレスバーのエリア */}
               <div className="flex flex-1 items-center ml-4 gap-2 font-bold">
                 {/* 最低気温 */}
-                <span className="w-8 text-right">{item.min}</span>
+                <span className="w-8 text-right">{item.min}°</span>
                 {/* 気温変化を表現するプログレスバー本体 */}
                 <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                   {/* 温度の割合に応じた幅の変化 */}
@@ -49,7 +51,7 @@ export function DailyWeatherCard({ weather }: DailyWeatherCardProps) {
                   />
                 </div>
                 {/* 最高気温 */}
-                <span className="w-6">{item.max}</span>
+                <span className="w-6">{item.max}°</span>
               </div>
             </li>
           ))}

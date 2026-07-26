@@ -1,5 +1,7 @@
+import { WeatherType } from "./weather-type";
+
 export interface HourlyWeatherType {
     time: string;
-    icon: React.ReactNode;
+    icon: WeatherType;
     temp: string;
 }
