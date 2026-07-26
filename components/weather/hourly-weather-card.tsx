@@ -39,7 +39,7 @@ export function HourlyWeatherCard({ weather }: hourlyWeatherCardProps) {
             className="hourly-item font-extrabold backdrop-blur-sm bg-white/10 border border-white/30 rounded-lg"
           >
             <p>{first.time}</p>
-            <FirstIcon className={firstIconClass} size={25} />
+            <FirstIcon className={firstIconClass} size={30} />
             <p>{first.temp}</p>
           </li>
 
@@ -52,7 +52,7 @@ export function HourlyWeatherCard({ weather }: hourlyWeatherCardProps) {
             return (
               <li key={item.time} className="hourly-item">
                 <p>{item.time}</p>
-                <Icon className={iconClass} size={25} />
+                <Icon className={iconClass} size={30} />
                 <p>{item.temp}</p>
               </li>
             );
