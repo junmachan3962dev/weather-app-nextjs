@@ -1,25 +1,30 @@
-'use client'
+"use client";
 
-import {CurrentWeatherType} from "@/types/current-weather";
+import { CurrentWeatherType } from "@/types/current-weather";
 
-import {ElementType} from "react";
+import { ElementType } from "react";
 
 //現在の天気カードコンポーネントに渡されるpropsの定義
 interface CurrentWeatherCardProps {
-  weather: CurrentWeatherType;  //表示対象の天気データ
-  openSearchModal: () => void;  //検索モーダルを開くためのハンドラー
-  IconComponent: ElementType;   //天気アイコンのコンポーネント
-  iconClass: string;            //天気の種類に応じた色のクラス
-};
+  weather: CurrentWeatherType; //表示対象の天気データ
+  openSearchModal: () => void; //検索モーダルを開くためのハンドラー
+  IconComponent: ElementType; //天気アイコンのコンポーネント
+  iconClass: string; //天気の種類に応じた色のクラス
+}
 
-
-export function CurrentWeatherCard(
-  {weather, openSearchModal, IconComponent, iconClass}: CurrentWeatherCardProps) 
-{
+export function CurrentWeatherCard({
+  weather,
+  openSearchModal,
+  IconComponent,
+  iconClass,
+}: CurrentWeatherCardProps) {
   return (
     <main>
       {/* 地域名と更新時刻のヘッダー部分 */}
-      <div className="text-center group cursor-pointer" onClick={openSearchModal}>
+      <div
+        className="text-center group cursor-pointer"
+        onClick={openSearchModal}
+      >
         <h2 className="text-3xl font-extrabold">{weather.city}</h2>
         <div className="flex items-center justify-center gap-1 text-sm text-gray-500 group-hover:text-gray-300 transition-colors duration-300">
           <span>Change Location</span>

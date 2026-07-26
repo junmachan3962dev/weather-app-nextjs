@@ -17,6 +17,6 @@ export const WEATHER_ICONS: Record<WeatherType, React.ElementType> = {
 
 //現在の天気に対するアイコンの変換関数
 export const getWeatherIcon = (type: string) => {
-  const Icon = WEATHER_ICONS[type  as keyof typeof WEATHER_ICONS] || Sun;
+  const Icon = WEATHER_ICONS[type as keyof typeof WEATHER_ICONS] || Sun;
   return Icon;
 };

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarDays, Sun } from "lucide-react";
-import {WeatherItem} from "@/types/daily-weather";
+import { WeatherItem } from "@/types/daily-weather";
 
 import { WEATHER_ICONS } from "@/constants/weather";
 
@@ -8,9 +8,9 @@ import { WEATHER_ICONS } from "@/constants/weather";
 //weatherには週間天気のWeatherItemの配列を渡す
 type DailyWeatherCardProps = {
   weather: WeatherItem[];
-}
+};
 
-export function DailyWeatherCard({weather}: DailyWeatherCardProps) {
+export function DailyWeatherCard({ weather }: DailyWeatherCardProps) {
   return (
     //カード全体の見た目（背景投下や境界線）を設定
     <Card className="backdrop-blur-md bg-white/20 border border-white/30 shadow-lg p-4">
@@ -27,7 +27,10 @@ export function DailyWeatherCard({weather}: DailyWeatherCardProps) {
         <ul className="space-y-2">
           {/* WeatherDataから各日のデータを展開してループ処理 */}
           {weather.map((item) => (
-            <li key={item.day} className="flex justify-between items-center gap-2">
+            <li
+              key={item.day}
+              className="flex justify-between items-center gap-2"
+            >
               {/* 日付と天気アイコンの表示エリア */}
               <div className="flex justify-between w-24 font-bold">
                 <span>{item.day}</span>
