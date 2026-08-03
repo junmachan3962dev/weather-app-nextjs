@@ -19,7 +19,7 @@ export function CurrentWeatherCard({
   iconClass,
 }: CurrentWeatherCardProps) {
   return (
-    <main>
+    <section>
       {/* 地域名と更新時刻のヘッダー部分 */}
       <div
         className="text-center group cursor-pointer"
@@ -36,7 +36,7 @@ export function CurrentWeatherCard({
       <div className="flex flex-col items-center mt-2">
         {/* IconComponentのデータを流し込む */}
         <IconComponent className={iconClass} size={64} />
-        <p className="mt-2 text-3xl font-extrabold"></p>
+        <p className="mt-2 text-3xl font-extrabold">{weather.temp}</p>
         <p className="font-semibold">{weather.weather}</p>
         {/* 最高気温と最低気温の表示 */}
         <div className="flex justify-center mt-2 gap-2 font-semibold">
@@ -48,6 +48,6 @@ export function CurrentWeatherCard({
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

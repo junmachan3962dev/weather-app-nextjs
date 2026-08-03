@@ -11,7 +11,6 @@ type hourlyWeatherCardProps = {
 export function HourlyWeatherCard({ weather }: hourlyWeatherCardProps) {
   //初回の現在時刻の天気用
   const first = weather[0];
-  getIconClass;
   //2件目以降の天気用
   const rest = weather.slice(1);
 
@@ -23,7 +22,7 @@ export function HourlyWeatherCard({ weather }: hourlyWeatherCardProps) {
     //ガラスモーフィズム適用
     <Card className="backdrop-blur-md bg-white/20 border border-white/30 shadow-lg p-4">
       {/* カードヘッダー */}
-      <CardHeader className="flex justify-between mb-[-4]">
+      <CardHeader className="flex justify-between mb-4">
         <CardTitle className="flex items-center gap-1 font-semibold">
           <Clock size={16} />
           <span className="text-sm font-medium">HOURLY FORECAST</span>
