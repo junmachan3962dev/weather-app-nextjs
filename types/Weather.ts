@@ -1,11 +1,11 @@
 //天気の種類の定義
-export type WeatherType = "晴れ" | "曇り" | "雨" | "雪";
+export type WeatherType = "Sun" | "Cloud" | "CloudSun" | "CloudRain" | "CloudSnow";
 
 //現在の天気の型定義
 export interface CurrentWeather {
     city: string;
     condition: WeatherType;
-    icon: string;
+    icon: WeatherType;
     temp: number;
     tempMax: number;
     tempMin: number;
@@ -17,7 +17,7 @@ export interface CurrentWeather {
 export interface HourlyWeather {
     time: string;
     condition: WeatherType;
-    icon: string;
+    icon: WeatherType;
     temp: number;
     tempMax: number;
     tempMin: number;
@@ -25,17 +25,18 @@ export interface HourlyWeather {
 }
 
 //週間天気の型定義
-export interface DailyWeatehr {
+export interface DailyWeather {
     day: string;
     condition: WeatherType;
-    icon: string;
+    icon: WeatherType;
     tempMax: number;
     tempMin: number;
     precipitation: number;
 }
 
+//モックデータの型定義
 export interface WeatherData {
     current: CurrentWeather;
     hourly: HourlyWeather[];
-    daily: DailyWeatehr[];
+    daily: DailyWeather[];
 }
