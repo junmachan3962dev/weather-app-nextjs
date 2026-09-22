@@ -6,7 +6,7 @@ interface DailyWeatherProps {
   dailyData: DailyWeather[];
 }
 
-export function DailyWeather({ dailyData }: DailyWeatherProps) {
+export function DailyWeatherComponent({ dailyData }: DailyWeatherProps) {
   //1.全体の制定・最高気温を計算
   const allMin = Math.min(...dailyData.map((d) => d.tempMin));
   const allMax = Math.max(...dailyData.map((d) => d.tempMax));

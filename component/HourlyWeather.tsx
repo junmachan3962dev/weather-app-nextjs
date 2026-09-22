@@ -6,7 +6,7 @@ interface HourlyWeatherProps {
   hourlyData: HourlyWeather[];
 }
 
-export function HourlyWeather({ hourlyData }: HourlyWeatherProps) {
+export function HourlyWeatherComponent({ hourlyData }: HourlyWeatherProps) {
   return (
     <Card>
       <CardHeader>
