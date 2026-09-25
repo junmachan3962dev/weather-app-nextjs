@@ -12,7 +12,7 @@ export function HourlyWeatherComponent({ hourlyData }: HourlyWeatherProps) {
       <CardHeader>
         <CardTitle className="font-bold text-base">３時間ごとの天気</CardTitle>
       </CardHeader>
-    
+
       <CardContent>
         <ul className="flex items-center overflow-x-auto scrollbar-none scroll-smooth snap-x snap-proximity p-1 gap-3">
           {hourlyData.map((item) => {

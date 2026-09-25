@@ -55,4 +55,4 @@ export async function getWeatherByCity(city: string) {
    fetchOpenWeather()に天気データ取得のためのurlを送る 
 3. fetchOpenWeather()がAPIからデータを受け取りデータを返す 
 ＊ getWeatherByCity()はAPIでの処理の流れを指揮する司令塔の役割
-*/
+*
