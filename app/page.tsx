@@ -2,24 +2,26 @@ import { HeaderBarComponent } from "@/component/HeaderBar";
 import { CurrentWeatherComponent } from "@/component/CurrentWeather";
 import { HourlyWeatherComponent } from "@/component/HourlyWeather";
 import { DailyWeatherComponent } from "@/component/DailyWeather";
-/* import { mockWeatherData } from "@/data/Weather"; */
-// #1. mockWeatherDataの代わりに、API司令塔をインポート
-import {getWeatherByCity} from "@/lib/openWeather";
+import { getWeatherByCity } from "@/lib/openWeather";
 import { convertOpenWeatherToAppData} from "@/utils/weather-map";
+import WeatherSearch from "@/component/weatherSearch";
 
-// #2. サーバーコンポーネントとして async を付与
-export default async function WeatherPage() {
-  // #3. 司令塔を使って、指定した都市（例: "Kitakami"）のデータを取得
-  const {weatherData} = await getWeatherByCity("nagoya")
-  // #4. 取得した生データを、翻訳関数（マッパー）に渡してモックと同じ形に変換する
+// サーバーコンポーネントとして async を付与
+export default async function WeatherPage() { 
+  // APIロジックへ都市名をパラメーターとして送り天気情報を取得する
+  const { weatherData } = await getWeatherByCity("nagoya")
+  // 取得した天気情報を、翻訳関数に渡しUIに使用できる形に整形する
   const mappedData = convertOpenWeatherToAppData(weatherData);
 
   return (
     <main className="w-full max-w-md p-4 mx-auto min-h-screen space-y-4">
+      <WeatherSearch />
+      
       {/* HeaderBar */}
       <section className="w-full">
         <HeaderBarComponent />
       </section>
+      
       {/* CurrentWeatherComponent */}
       <section className="w-full">
         <CurrentWeatherComponent currentData={mappedData.current} />
