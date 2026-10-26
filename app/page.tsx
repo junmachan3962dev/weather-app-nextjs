@@ -9,7 +9,7 @@ import WeatherSearch from "@/component/weatherSearch";
 // サーバーコンポーネントとして async を付与
 export default async function WeatherPage() { 
   // APIロジックへ都市名をパラメーターとして送り天気情報を取得する
-  const { weatherData } = await getWeatherByCity("nagoya")
+  const { weatherData } = await getWeatherByCity("那覇")
   // 取得した天気情報を、翻訳関数に渡しUIに使用できる形に整形する
   const mappedData = convertOpenWeatherToAppData(weatherData);
 

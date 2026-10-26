@@ -1,14 +1,23 @@
-import { NextResponse } from "next/server";
-import { getWeatherByCoordinates } from "@/lib/openWeather";
+/* ===== 都市名からの処理とlat,lonからの処理 ===== */
 
-//＊このコードはブラウザの位置情報API(Geolocation API)からのjsonデータをAPIロジックに送るためのコード
-export async function POST(request: Request) {
-  //Requestはブラウザが提供する型
-  // 1.bodyをunknown型に定義しif文で下記のようにバリデーションする
+import { NextResponse } from "next/server";
+import { 
+  getWeatherByCoordinates, //現在地の緯度・経度から天気情報を取得する関数
+  getWeatherByCity,        //都市名から天気情報を取得する関数
+ } from "@/lib/openWeather";
+
+/* 
+この関数ははブラウザからの緯度・経度の情報と都市名検索の都市名情報を両方受け取り
+バリデーションし正しい値をAPIに送る関数
+*/
+export async function POST(request: Request) { //Requestはブラウザが提供する型
+  // 1.ここからは緯度・経度と都市名共通の処理 
+  //bodyをunknown型に定義しif文で下記のようにバリデーションする
   let body: unknown;
   //ブラウザ側からデータを受けてそのtry~catchの処理をする
   try {
-    body = await request.json();
+    //ブラウザからのリクエストボディを受け取る
+    body = await request.json(); 
   } catch {
     return NextResponse.json(
       { error: "リクエストのJSON形式が正しくありません" },
@@ -18,14 +27,26 @@ export async function POST(request: Request) {
   try {
     //オブジェクトでない時、null値であるとき、配列である時はエラーを表示する
     if (typeof body !== "object" || body == null || Array.isArray(body)) {
+      //JSON解析に失敗したら400エラー（ブラウザのエラー）を出す
       return NextResponse.json(
         { error: "リクエストの形式が不正です。" },
         { status: 400 },
       );
     }
 
-    // 2.lat,lonをバリデーションでnumber型を確定させる
-    const { lat, lon } = body as Record<string, unknown>;
+    const { lat, lon, city } = body as Record<string, unknown>;
+
+    // 2. ここからは都市名のバリデーション
+    if (typeof city === "string") {
+      if (city.trim() === "") {
+      throw new Error("CITY_EMPTY");
+    }
+    
+    const cityResult = await getWeatherByCity(city.trim());
+    return NextResponse.json(cityResult);
+  }
+
+    // 3. ここからはlat,lonをバリデーション
     //入力値（lat,lon)のバリデーション(下記の⓵〜⓷を確認する)
     //⓵数値型か？②数値が有限か？⓷緯度が−９０〜９０、経度が−１８０〜１８０の範囲内か？
     if (
@@ -50,8 +71,25 @@ export async function POST(request: Request) {
     //NextResponseによってブラウザに返せるJSON形式のHTTPレスポンスに組み立ててくれる
     return NextResponse.json(result); //NextResponseはnext.jsが提供するクラス
   
-  //サーバー側で予期しないエラーが発生した場合は500を返す
+  
   } catch (error) {
+    //openWeather.tsから空の都市名が投げられた時のcatch側の処理
+    if (error instanceof Error && error.message === "CITY_NOT_FOUND") {
+      return NextResponse.json(
+        {error: "指定された都市が見つかりませんでした"},
+        {status: 404},
+      );
+    }
+
+    //都市名が空文字だった場合のcatchの処理
+    if (error instanceof Error && error.message === "CITY_EMPTY") {
+      return NextResponse.json(
+        {error: "都市名を入力してください"},
+        {status: 400},
+      );
+    }
+
+    //サーバー側で予期しないエラーが発生した場合は500を返す
     return NextResponse.json(
       { error: "天気データの取得に失敗しました。" },
       { status: 500 },

@@ -26,9 +26,9 @@ export async function getCoordinatesByCity(city: string) {
   //ジオコーディングAPIにリクエストを送り、検索結果を取得する
   const data = await fetchOpenWeather(url);
 
-  //検索結果が空の場合はエラーメッセージで知らせる
+  //検索結果が空の配列（空文字とは別なのでそれはroute.tsで処理する）の場合はエラーメッセージで知らせる（route.ts側のcatchで受け取る）
   if (!data.length) {
-    throw new Error(`指定された都市が見つかりませんでした： ${city}`);
+    throw new Error("CITY_NOT_FOUND");
   }
 
   //fetchOpenWeather関数から緯度・経度、都市名を取得する
@@ -62,8 +62,10 @@ export async function getWeatherByCity(city: string) {
 */
 
 
-// 現在地の緯度・経度から天気を取得する 
+// 現在地の緯度・経度から天気を取得する (weatherSearch.tsxのブラウザから取得した緯度・経度）
 export async function getWeatherByCoordinates(lat: number, lon: number) {
     const weatherData = await fetchWeatherData(lat, lon);
-    return {weatherData};
+    const name = weatherData.city.name;
+
+    return {cityName: name, weatherData};
 }

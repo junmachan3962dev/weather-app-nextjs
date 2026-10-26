@@ -6,10 +6,18 @@ import { Search } from "lucide-react";
 export function HeaderBarComponent() {
   const [city, setCity] = useState("");
 
-  function handleSearch(e: React.FormEvent) {
+  async function handleSearch(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("検索", city);
-    //あとでAPI Route に cityを送る処理を追加する
+    
+    // API Route(app/api/route.ts) に cityを送る処理
+    const response = await fetch("/api/weather", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({city}) //stringifyでJSON文字に変換する
+    })
   }
 
   return (
